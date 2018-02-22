@@ -1,5 +1,7 @@
 package br.edu.cse.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,5 +44,8 @@ public class CursoService {
 		return repository.count();
 	}
 
+	public List<Curso> procuraPorNome(String nome) {
+		return repository.findByNome(nome);
+	}
 
 }

@@ -2,6 +2,8 @@ package br.edu.cse.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,10 +12,11 @@ import javax.persistence.Table;
 public class CursoPadrao {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(name="ID_CURSO_PADRAO")
 	private Long id;
 	
-	@Column(name="NOME")
+	@Column(name="NOME", nullable=false)
 	private String nome;
 	
 	public Long getId() {
