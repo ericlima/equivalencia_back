@@ -13,7 +13,7 @@ public class CursoPadrao {
 	@Column(name="ID_CURSO_PADRAO")
 	private Long id;
 	
-	@Column(name="NOME")
+	@Column(name="NOME", nullable=false)
 	private String nome;
 	
 	public Long getId() {

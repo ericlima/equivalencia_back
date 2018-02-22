@@ -13,10 +13,10 @@ public class DisciplinaPadrao {
 	@Column(name="ID_DISCIPLINA_PADRAO")
 	private Long id;
 	
-	@Column(name="NOME")
+	@Column(name="NOME", nullable=false)
 	private String nome;
 
-	@Column(name="CARGA_HORARIA")
+	@Column(name="CARGA_HORARIA", nullable=false)
 	private Integer cargaHoraria;
 
 	public Long getId() {

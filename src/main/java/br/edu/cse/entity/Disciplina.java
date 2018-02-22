@@ -13,7 +13,7 @@ public class Disciplina {
 	@Column(name="ID_DISCIPLINA")
 	private Long id;
 
-	@Column(name="NOME")
+	@Column(name="NOME", nullable=false)
 	private String nome;
 	
 	@Column(name="ID_IES")
@@ -21,6 +21,17 @@ public class Disciplina {
 
 	@Column(name="ID_DISCIPLINA_PADRAO")
 	private Long idDisciplinaPadrao;
+
+	@Column(name="CARGA_HORARIA", nullable=false)
+	private Integer cargaHoraria;
+
+	public Integer getCargaHoraria() {
+		return cargaHoraria;
+	}
+
+	public void setCargaHoraria(Integer cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
+	}
 
 	public Long getId() {
 		return id;

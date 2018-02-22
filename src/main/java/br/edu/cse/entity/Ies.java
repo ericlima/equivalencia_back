@@ -12,7 +12,7 @@ public class Ies {
 	@Id
 	@Column(name="ID_IES")
 	private Long id;
-	@Column(name="NOME")
+	@Column(name="NOME", nullable=false)
 	private String nome;
 	@Column(name="IES_EXTERNA")
 	private Boolean externa;
