@@ -1,6 +1,7 @@
 package br.edu.cse.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.websocket.server.PathParam;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.Curso;
+import br.edu.cse.entity.Ies;
 import br.edu.cse.service.CursoService;
 
 @RestController
@@ -27,6 +29,11 @@ public class CursoController {
 	public Collection<Curso> todos(@PathVariable Long pagina) {
 		Page<Curso> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
+	}
+
+	@GetMapping("/curso/buscapornome/{nome}")
+	public List<Curso> procuraPorNome(@PathVariable String nome) {
+		return service.procuraPorNome(nome);
 	}
 	
 	@GetMapping("/curso/{id}")

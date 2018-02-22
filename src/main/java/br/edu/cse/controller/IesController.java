@@ -1,6 +1,7 @@
 package br.edu.cse.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.websocket.server.PathParam;
 
@@ -32,6 +33,11 @@ public class IesController {
 	@GetMapping("/ies/{id}")
 	public Ies obtemCidade(@PathVariable Long id) {
 		return service.obtem(id);
+	}
+	
+	@GetMapping("/ies/buscapornome/{nome}")
+	public List<Ies> procuraPorNome(@PathVariable String nome) {
+		return service.procuraPorNome(nome);
 	}
 	
 	@PostMapping("/ies")

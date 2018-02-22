@@ -1,6 +1,7 @@
 package br.edu.cse.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.websocket.server.PathParam;
 
@@ -27,6 +28,11 @@ public class CursoPadraoController {
 	public Collection<CursoPadrao> todos(@PathVariable Long pagina) {
 		Page<CursoPadrao> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
+	}
+	
+	@GetMapping("/cursopadrao/buscapornome/{nome}")
+	public List<CursoPadrao> procuraPorNome(@PathVariable String nome) {
+		return service.procuraPorNome(nome);
 	}
 	
 	@GetMapping("/cursopadrao/{id}")
