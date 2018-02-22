@@ -3,7 +3,6 @@ package br.edu.cse.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 public class Disciplina {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue
 	@Column(name = "ID_DISCIPLINA")
 	private Long id;
 

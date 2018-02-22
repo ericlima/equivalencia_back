@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.DisciplinaPadrao;
@@ -24,7 +25,7 @@ public class DisciplinaPadraoController {
 	@Autowired
 	private DisciplinaPadraoService service;
 
-	@GetMapping("/disciplinapadrao/{pagina}")
+	@GetMapping("/disciplinapadraolist/{pagina}")
 	public Collection<DisciplinaPadrao> todos(@PathVariable Long pagina) {
 		Page<DisciplinaPadrao> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
@@ -41,7 +42,7 @@ public class DisciplinaPadraoController {
 	}
 	
 	@PostMapping("/disciplinapadrao")
-	public DisciplinaPadrao salva(DisciplinaPadrao entidade) {
+	public DisciplinaPadrao salva(@RequestBody DisciplinaPadrao entidade) {
 		return service.salva(entidade);
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.CursoPadrao;
@@ -24,7 +25,7 @@ public class CursoPadraoController {
 	@Autowired
 	private CursoPadraoService service;
 
-	@GetMapping("/cursopadrao/{pagina}")
+	@GetMapping("/cursopadraolist/{pagina}")
 	public Collection<CursoPadrao> todos(@PathVariable Long pagina) {
 		Page<CursoPadrao> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
@@ -41,7 +42,7 @@ public class CursoPadraoController {
 	}
 	
 	@PostMapping("/cursopadrao")
-	public CursoPadrao salva(CursoPadrao entidade) {
+	public CursoPadrao salva(@RequestBody CursoPadrao entidade) {
 		return service.salva(entidade);
 	}
 	
