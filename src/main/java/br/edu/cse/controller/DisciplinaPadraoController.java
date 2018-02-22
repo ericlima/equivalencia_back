@@ -30,7 +30,7 @@ public class DisciplinaPadraoController {
 		return retorno.getContent();
 	}
 	
-	@GetMapping("/disciplina/buscapornome/{nome}")
+	@GetMapping("/disciplinapadrao/buscapornome/{nome}")
 	public List<DisciplinaPadrao> procuraPorNome(@PathVariable String nome) {
 		return service.procuraPorNome(nome);
 	}
