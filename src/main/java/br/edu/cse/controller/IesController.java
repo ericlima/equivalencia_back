@@ -25,13 +25,13 @@ public class IesController {
 	private IesService service;
 
 	@GetMapping("/ies/{pagina}")
-	public Collection<Ies> obtemCidades(@PathVariable Long pagina) {
+	public Collection<Ies> todos(@PathVariable Long pagina) {
 		Page<Ies> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
 	}
 	
 	@GetMapping("/ies/{id}")
-	public Ies obtemCidade(@PathVariable Long id) {
+	public Ies obtemIes(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 	

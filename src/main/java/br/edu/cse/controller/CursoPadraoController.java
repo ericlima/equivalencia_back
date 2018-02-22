@@ -36,7 +36,7 @@ public class CursoPadraoController {
 	}
 	
 	@GetMapping("/cursopadrao/{id}")
-	public CursoPadrao obtemCidade(@PathVariable Long id) {
+	public CursoPadrao obtemCursoPadrao(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 	

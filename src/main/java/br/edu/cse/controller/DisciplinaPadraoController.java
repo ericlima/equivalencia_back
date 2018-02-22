@@ -36,7 +36,7 @@ public class DisciplinaPadraoController {
 	}
 	
 	@GetMapping("/disciplinapadrao/{id}")
-	public DisciplinaPadrao obtemCidade(@PathVariable Long id) {
+	public DisciplinaPadrao obtemDisciplinaPadrao(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 	

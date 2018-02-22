@@ -29,22 +29,22 @@ public class DisciplinaController {
 		Page<Disciplina> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
 	}
-	
+
 	@GetMapping("/disciplina/buscapornome/{nome}")
 	public List<Disciplina> procuraPorNome(@PathVariable String nome) {
 		return service.procuraPorNome(nome);
 	}
-	
+
 	@GetMapping("/disciplina/{id}")
-	public Disciplina obtemCidade(@PathVariable Long id) {
+	public Disciplina obtemDisciplina(@PathVariable Long id) {
 		return service.obtem(id);
 	}
-	
+
 	@PostMapping("/disciplina")
 	public Disciplina salva(Disciplina entidade) {
 		return service.salva(entidade);
 	}
-	
+
 	@DeleteMapping("/disciplina/{id}")
 	public void exclui(@PathParam(value = "id") Long id) {
 		service.exclui(id);

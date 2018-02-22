@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.Curso;
-import br.edu.cse.entity.Ies;
 import br.edu.cse.service.CursoService;
 
 @RestController
@@ -37,7 +36,7 @@ public class CursoController {
 	}
 	
 	@GetMapping("/curso/{id}")
-	public Curso obtemCidade(@PathVariable Long id) {
+	public Curso obtemCurso(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 	

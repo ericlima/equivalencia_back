@@ -8,18 +8,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CURSO")
+@Table(name = "CURSO")
 public class Curso {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE)
-	@Column(name="ID_CURSO")
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name = "ID_CURSO")
 	private Long id;
 
-	@Column(name="NOME", nullable=false)
+	@Column(name = "NOME", nullable = false)
 	private String nome;
 
-	@Column(name="ID_CURSO_PADRAO")
+	@Column(name = "ID_CURSO_PADRAO")
 	private Long idCursoPadrao;
 
 	public Long getId() {
@@ -45,7 +45,42 @@ public class Curso {
 	public void setIdCursoPadrao(Long idCursoPadrao) {
 		this.idCursoPadrao = idCursoPadrao;
 	}
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((idCursoPadrao == null) ? 0 : idCursoPadrao.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curso other = (Curso) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (idCursoPadrao == null) {
+			if (other.idCursoPadrao != null)
+				return false;
+		} else if (!idCursoPadrao.equals(other.idCursoPadrao))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+
 }
