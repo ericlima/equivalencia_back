@@ -18,6 +18,17 @@ public class Curso {
 
 	@Column(name = "NOME", nullable = false)
 	private String nome;
+	
+	@Column(name = "ID_IES", nullable = false)
+	private Long idIes;
+
+	public Long getIdIes() {
+		return idIes;
+	}
+
+	public void setIdIes(Long idIes) {
+		this.idIes = idIes;
+	}
 
 	@Column(name = "ID_CURSO_PADRAO")
 	private Long idCursoPadrao;
