@@ -47,5 +47,9 @@ public class DisciplinaService {
 	public List<Disciplina> procuraPorNome(String nome) {
 		return repository.findByNome(nome);
 	}
+	
+	public Long contaPaginas() {
+		return repository.count();
+	}
 
 }

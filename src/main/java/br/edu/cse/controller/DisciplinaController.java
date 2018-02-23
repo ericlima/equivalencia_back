@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.Disciplina;
@@ -20,35 +21,41 @@ import br.edu.cse.service.DisciplinaService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/disciplina")
 public class DisciplinaController {
 
 	@Autowired
 	private DisciplinaService service;
 
-	@GetMapping("/disciplinalist/{pagina}")
+	@GetMapping("/list/{pagina}")
 	public Collection<Disciplina> todos(@PathVariable Long pagina) {
 		Page<Disciplina> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
 	}
 
-	@GetMapping("/disciplina/buscapornome/{nome}")
+	@GetMapping("/nome/{nome}")
 	public List<Disciplina> procuraPorNome(@PathVariable String nome) {
 		return service.procuraPorNome(nome);
 	}
 
-	@GetMapping("/disciplina/{id}")
+	@GetMapping("/{id}")
 	public Disciplina obtemDisciplina(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 
-	@PostMapping("/disciplina")
+	@PostMapping
 	public Disciplina salva(@RequestBody Disciplina entidade) {
 		return service.salva(entidade);
 	}
 
-	@DeleteMapping("/disciplina/{id}")
+	@DeleteMapping("/{id}")
 	public void exclui(@PathParam(value = "id") Long id) {
 		service.exclui(id);
+	}
+	
+	@GetMapping("/contapaginas")
+	public Long contaPaginas() {
+		return service.contaPaginas()/20;
 	}
 
 }
