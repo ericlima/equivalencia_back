@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.Curso;
@@ -20,14 +20,15 @@ import br.edu.cse.service.CursoService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/curso")
 public class CursoController {
 
 	@Autowired
 	private CursoService service;
 
-	@GetMapping("/cursolist/{pagina}")
+	@GetMapping("/list/{pagina}")
 	public Collection<Curso> todos(@PathVariable Long pagina) {
-		Page<Curso> retorno = service.todos(pagina.intValue(), 20, "nome");
+		Page<Curso> retorno = service.todos(pagina.intValue(), 10, "nome");
 		return retorno.getContent();
 	}
 
@@ -36,19 +37,24 @@ public class CursoController {
 		return service.procuraPorNome(nome);
 	}
 	
-	@GetMapping("/curso/{id}")
+	@GetMapping("/{id}")
 	public Curso obtemCurso(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 	
-	@PostMapping("/curso")
+	
 	public Curso salva(@RequestBody Curso entidade) {
 		return service.salva(entidade);
 	}
 	
-	@DeleteMapping("/curso/{id}")
+	@DeleteMapping("/{id}")
 	public void exclui(@PathParam(value = "id") Long id) {
 		service.exclui(id);
+	}
+	
+	@GetMapping("/contapaginas")
+	public Long obtemPaginas() {
+		return (service.registros()/10);
 	}
 
 }
