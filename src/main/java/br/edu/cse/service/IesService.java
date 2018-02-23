@@ -28,6 +28,10 @@ public class IesService {
 		return repository.findAll(pageable);
 	}
 	
+	public List<Ies> todos () {
+		return repository.findAll();
+	}
+	
 	public Ies obtem(Long id) {
 		return repository.findOne(id);
 	}

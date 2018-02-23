@@ -18,28 +18,37 @@ public class DisciplinaService {
 
 	@Autowired
 	private DisciplinaRepository repository;
-	
+
 	public Page<Disciplina> todos(int pagina, int registrosPorPagina, String ordenadoPor) {
-		
+
 		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
-		
-		Pageable pageable = new PageRequest(pagina,registrosPorPagina, sort);
-		
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
 		return repository.findAll(pageable);
 	}
-	
+
+	public Page<Disciplina> todosPorIes(Long idIes, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByIdIes(idIes, pageable);
+	}
+
 	public Disciplina obtem(Long id) {
 		return repository.findOne(id);
 	}
-	
+
 	public Disciplina salva(Disciplina entidade) {
 		return repository.save(entidade);
 	}
-	
+
 	public void exclui(Long id) {
 		repository.delete(id);
-	}	
-	
+	}
+
 	public Long registros() {
 		return repository.count();
 	}
@@ -47,7 +56,7 @@ public class DisciplinaService {
 	public List<Disciplina> procuraPorNome(String nome) {
 		return repository.findByNome(nome);
 	}
-	
+
 	public Long contaPaginas() {
 		return repository.count();
 	}
