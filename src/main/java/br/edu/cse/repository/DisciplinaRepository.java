@@ -14,4 +14,6 @@ public interface DisciplinaRepository extends JpaRepository<Disciplina, Long> {
 
 	public Page<Disciplina> findByIdIes(Long idIes, Pageable pageReguest);
 	
+	public Page<Disciplina> findByNomeContaining(String nome, Pageable pageReguest);
+	
 }

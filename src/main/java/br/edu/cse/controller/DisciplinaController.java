@@ -44,6 +44,11 @@ public class DisciplinaController {
 		return service.procuraPorNome(nome);
 	}
 
+	@GetMapping("/nome/{nome}/pagina/{pagina}")
+	public List<Disciplina> procuraPorNomePaginado(@PathVariable String nome, @PathVariable Long pagina) {
+		return service.buscaPorNome(nome, pagina.intValue(), 10, "nome").getContent();
+	}
+
 	@GetMapping("/{id}")
 	public Disciplina obtemDisciplina(@PathVariable Long id) {
 		return service.obtem(id);

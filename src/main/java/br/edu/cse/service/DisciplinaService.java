@@ -37,6 +37,15 @@ public class DisciplinaService {
 		return repository.findByIdIes(idIes, pageable);
 	}
 
+	public Page<Disciplina> buscaPorNome(String nome, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByNomeContaining(nome, pageable);
+	}
+
 	public Disciplina obtem(Long id) {
 		return repository.findOne(id);
 	}
