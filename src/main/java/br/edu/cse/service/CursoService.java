@@ -28,6 +28,24 @@ public class CursoService {
 		return repository.findAll(pageable);
 	}
 	
+	public Page<Curso> todosPorIes(Long idIes, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByIdIes(idIes, pageable);
+	}
+	
+	public Page<Curso> buscaPorNome(String nome, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByNomeContaining(nome, pageable);
+	}
+	
 	public Curso obtem(Long id) {
 		return repository.findOne(id);
 	}

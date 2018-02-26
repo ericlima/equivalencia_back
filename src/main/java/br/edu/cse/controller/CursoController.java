@@ -31,10 +31,21 @@ public class CursoController {
 		Page<Curso> retorno = service.todos(pagina.intValue(), 10, "nome");
 		return retorno.getContent();
 	}
+	
+	@GetMapping("/ies/{ies}/list/{pagina}")
+	public Collection<Curso> todosPorIes(@PathVariable Long ies, @PathVariable Long pagina) {
+		Page<Curso> retorno = service.todosPorIes(ies,pagina.intValue(), 10, "nome");
+		return retorno.getContent();
+	}
 
-	@GetMapping("/curso/buscapornome/{nome}")
+	@GetMapping("/nome/{nome}")
 	public List<Curso> procuraPorNome(@PathVariable String nome) {
 		return service.procuraPorNome(nome);
+	}
+	
+	@GetMapping("/nome/{nome}/pagina/{pagina}")
+	public List<Curso> procuraPorNomePaginado(@PathVariable String nome, @PathVariable Long pagina) {
+		return service.buscaPorNome(nome, pagina.intValue(), 10, "nome").getContent();
 	}
 	
 	@GetMapping("/{id}")
@@ -56,5 +67,4 @@ public class CursoController {
 	public Long obtemPaginas() {
 		return (service.registros()/10);
 	}
-
 }
