@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.Ies;
@@ -20,36 +21,41 @@ import br.edu.cse.service.IesService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/ies")
 public class IesController {
 
 	@Autowired
 	private IesService service;
 
-	@GetMapping("/ieslist/{pagina}")
+	@GetMapping("/list/{pagina}")
 	public Collection<Ies> todos(@PathVariable Long pagina) {
 		Page<Ies> retorno = service.todos(pagina.intValue(), 20, "nome");
 		return retorno.getContent();
 	}
 	
-	@GetMapping("/ies/{id}")
+	@GetMapping("/combo")
+	public Collection<Ies> combo() {
+		return service.todos();
+	}
+	
+	@GetMapping("/{id}")
 	public Ies obtemIes(@PathVariable Long id) {
 		return service.obtem(id);
 	}
 	
-	@GetMapping("/ies/buscapornome/{nome}")
+	@GetMapping("/nome/{nome}")
 	public List<Ies> procuraPorNome(@PathVariable String nome) {
 		return service.procuraPorNome(nome);
 	}
 	
-	@PostMapping("/ies")
+	@PostMapping
 	public Ies salva(@RequestBody Ies entidade) {
 		return service.salva(entidade);
 	}
 	
-	@DeleteMapping("/ies/{id}")
+	@DeleteMapping("/{id}")
 	public void exclui(@PathParam(value = "id") Long id) {
 		service.exclui(id);
 	}
-
 	
 }

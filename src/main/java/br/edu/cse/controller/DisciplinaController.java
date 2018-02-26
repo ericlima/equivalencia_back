@@ -29,13 +29,24 @@ public class DisciplinaController {
 
 	@GetMapping("/list/{pagina}")
 	public Collection<Disciplina> todos(@PathVariable Long pagina) {
-		Page<Disciplina> retorno = service.todos(pagina.intValue(), 20, "nome");
+		Page<Disciplina> retorno = service.todos(pagina.intValue(), 10, "nome");
+		return retorno.getContent();
+	}
+	
+	@GetMapping("/ies/{ies}/list/{pagina}")
+	public Collection<Disciplina> todosPorIes(@PathVariable Long ies, @PathVariable Long pagina) {
+		Page<Disciplina> retorno = service.todosPorIes(ies,pagina.intValue(), 10, "nome");
 		return retorno.getContent();
 	}
 
 	@GetMapping("/nome/{nome}")
 	public List<Disciplina> procuraPorNome(@PathVariable String nome) {
 		return service.procuraPorNome(nome);
+	}
+
+	@GetMapping("/nome/{nome}/pagina/{pagina}")
+	public List<Disciplina> procuraPorNomePaginado(@PathVariable String nome, @PathVariable Long pagina) {
+		return service.buscaPorNome(nome, pagina.intValue(), 10, "nome").getContent();
 	}
 
 	@GetMapping("/{id}")
