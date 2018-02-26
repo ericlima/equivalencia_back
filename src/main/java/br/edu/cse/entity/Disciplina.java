@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "DISCIPLINA")
@@ -24,8 +27,32 @@ public class Disciplina {
 	@Column(name = "ID_DISCIPLINA_PADRAO")
 	private Long idDisciplinaPadrao;
 
+	@JsonInclude()
+	@Transient
+	private String nomeDisciplinaPadrao;
+	
+	@JsonInclude()
+	@Transient
+	private Integer cargaHorariaDisciplinaPadrao;	
+
 	@Column(name = "CARGA_HORARIA", nullable = false)
 	private Integer cargaHoraria;
+	
+	public String getNomeDisciplinaPadrao() {
+		return nomeDisciplinaPadrao;
+	}
+
+	public void setNomeDisciplinaPadrao(String nomeDisciplinaPadrao) {
+		this.nomeDisciplinaPadrao = nomeDisciplinaPadrao;
+	}
+
+	public Integer getCargaHorariaDisciplinaPadrao() {
+		return cargaHorariaDisciplinaPadrao;
+	}
+
+	public void setCargaHorariaDisciplinaPadrao(Integer cargaHorariaDisciplinaPadrao) {
+		this.cargaHorariaDisciplinaPadrao = cargaHorariaDisciplinaPadrao;
+	}
 
 	public Integer getCargaHoraria() {
 		return cargaHoraria;
