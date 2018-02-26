@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.cse.entity.Disciplina;
+import br.edu.cse.entity.DisciplinaPadrao;
+import br.edu.cse.service.DisciplinaPadraoService;
 import br.edu.cse.service.DisciplinaService;
 
 @RestController
@@ -27,6 +29,9 @@ public class DisciplinaController {
 	@Autowired
 	private DisciplinaService service;
 
+	@Autowired
+	private DisciplinaPadraoService servicePadrao;
+
 	@GetMapping("/list/{pagina}")
 	public Collection<Disciplina> todos(@PathVariable Long pagina) {
 		Page<Disciplina> retorno = service.todos(pagina.intValue(), 10, "nome");
@@ -36,6 +41,13 @@ public class DisciplinaController {
 	@GetMapping("/ies/{ies}/list/{pagina}")
 	public Collection<Disciplina> todosPorIes(@PathVariable Long ies, @PathVariable Long pagina) {
 		Page<Disciplina> retorno = service.todosPorIes(ies,pagina.intValue(), 10, "nome");
+		for(Disciplina disciplina : retorno) {
+			if (disciplina.getIdDisciplinaPadrao() != null && disciplina.getIdDisciplinaPadrao() > 0) {
+				DisciplinaPadrao padrao = servicePadrao.obtem(disciplina.getIdDisciplinaPadrao());
+				disciplina.setNomeDisciplinaPadrao(padrao.getNome());
+				disciplina.setCargaHorariaDisciplinaPadrao(padrao.getCargaHoraria());
+			}
+		}
 		return retorno.getContent();
 	}
 
@@ -46,7 +58,15 @@ public class DisciplinaController {
 
 	@GetMapping("/nome/{nome}/pagina/{pagina}")
 	public List<Disciplina> procuraPorNomePaginado(@PathVariable String nome, @PathVariable Long pagina) {
-		return service.buscaPorNome(nome, pagina.intValue(), 10, "nome").getContent();
+		List<Disciplina> retorno = service.buscaPorNome(nome, pagina.intValue(), 10, "nome").getContent();
+		for(Disciplina disciplina : retorno) {
+			if (disciplina.getIdDisciplinaPadrao() !=null && disciplina.getIdDisciplinaPadrao() > 0) {
+				DisciplinaPadrao padrao = servicePadrao.obtem(disciplina.getIdDisciplinaPadrao());
+				disciplina.setNomeDisciplinaPadrao(padrao.getNome());
+				disciplina.setCargaHorariaDisciplinaPadrao(padrao.getCargaHoraria());
+			}
+		}
+		return retorno; 
 	}
 
 	@GetMapping("/{id}")

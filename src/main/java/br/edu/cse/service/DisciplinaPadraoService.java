@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import br.edu.cse.entity.Disciplina;
 import br.edu.cse.entity.DisciplinaPadrao;
 import br.edu.cse.repository.DisciplinaPadraoRepository;
 
@@ -26,6 +27,15 @@ public class DisciplinaPadraoService {
 		Pageable pageable = new PageRequest(pagina,registrosPorPagina, sort);
 		
 		return repository.findAll(pageable);
+	}
+	
+	public Page<DisciplinaPadrao> buscaPorNome(String nome, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByNomeContaining(nome, pageable);
 	}
 	
 	public DisciplinaPadrao obtem(Long id) {
