@@ -39,7 +39,13 @@ public class DisciplinaPadraoService {
 	}
 	
 	public DisciplinaPadrao obtem(Long id) {
-		return repository.findOne(id);
+		DisciplinaPadrao retorno = null;
+		try {
+			retorno = repository.findOne(id);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return retorno;
 	}
 	
 	public DisciplinaPadrao salva(DisciplinaPadrao entidade) {

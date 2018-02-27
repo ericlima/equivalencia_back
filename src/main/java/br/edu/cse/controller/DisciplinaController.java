@@ -44,8 +44,10 @@ public class DisciplinaController {
 		for(Disciplina disciplina : retorno) {
 			if (disciplina.getIdDisciplinaPadrao() != null && disciplina.getIdDisciplinaPadrao() > 0) {
 				DisciplinaPadrao padrao = servicePadrao.obtem(disciplina.getIdDisciplinaPadrao());
-				disciplina.setNomeDisciplinaPadrao(padrao.getNome());
-				disciplina.setCargaHorariaDisciplinaPadrao(padrao.getCargaHoraria());
+				if (padrao != null) {
+					disciplina.setNomeDisciplinaPadrao(padrao.getNome());
+					disciplina.setCargaHorariaDisciplinaPadrao(padrao.getCargaHoraria());
+				}
 			}
 		}
 		return retorno.getContent();
