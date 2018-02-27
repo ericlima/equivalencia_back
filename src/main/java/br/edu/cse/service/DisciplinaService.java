@@ -76,6 +76,7 @@ public class DisciplinaService {
 	}
 	
 	public void associa(Long id) {
+		try {
 		Disciplina disc = repository.findOne(id);
 		DisciplinaPadrao discP = new DisciplinaPadrao();
 		discP.setNome(disc.getNome());
@@ -83,12 +84,19 @@ public class DisciplinaService {
 		discP = repositoryPadrao.save(discP);
 		disc.setIdDisciplinaPadrao(discP.getId());
 		repository.save(disc);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void desassocia(Long id) {
+		try {
 		Disciplina disc = repository.findOne(id);
 		disc.setIdDisciplinaPadrao(null);
 		repository.save(disc);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		} 
 	}
 	
 }

@@ -82,7 +82,7 @@ public class DisciplinaController {
 	}
 
 	@DeleteMapping("/{id}")
-	public void exclui(@PathParam(value = "id") Long id) {
+	public void exclui(@PathVariable Long id) {
 		service.exclui(id);
 	}
 	
@@ -92,12 +92,12 @@ public class DisciplinaController {
 	}
 	
 	@GetMapping("/autoassociacao/{id}")
-	public void autoAssociacao(@PathParam(value = "id") Long id) {
+	public void autoAssociacao(@PathVariable Long id) {
 		service.associa(id);
 	}
 	
 	@GetMapping("/desassocia/{id}")
-	public void desassocia(@PathParam(value = "id") Long id) {
+	public void desassocia(@PathVariable Long id) {
 		service.desassocia(id);
 	}
 
