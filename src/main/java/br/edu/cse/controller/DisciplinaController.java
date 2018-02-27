@@ -90,5 +90,16 @@ public class DisciplinaController {
 	public Long contaPaginas() {
 		return service.contaPaginas()/20;
 	}
+	
+	@GetMapping("/autoassociacao/{id}")
+	public void autoAssociacao(@PathParam(value = "id") Long id) {
+		service.associa(id);
+	}
+	
+	@GetMapping("/desassocia/{id}")
+	public void desassocia(@PathParam(value = "id") Long id) {
+		service.desassocia(id);
+	}
+
 
 }

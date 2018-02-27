@@ -11,6 +11,8 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import br.edu.cse.entity.Disciplina;
+import br.edu.cse.entity.DisciplinaPadrao;
+import br.edu.cse.repository.DisciplinaPadraoRepository;
 import br.edu.cse.repository.DisciplinaRepository;
 
 @Service
@@ -18,6 +20,9 @@ public class DisciplinaService {
 
 	@Autowired
 	private DisciplinaRepository repository;
+
+	@Autowired
+	private DisciplinaPadraoRepository repositoryPadrao;
 
 	public Page<Disciplina> todos(int pagina, int registrosPorPagina, String ordenadoPor) {
 
@@ -69,5 +74,21 @@ public class DisciplinaService {
 	public Long contaPaginas() {
 		return repository.count();
 	}
+	
+	public void associa(Long id) {
+		Disciplina disc = repository.findOne(id);
+		DisciplinaPadrao discP = new DisciplinaPadrao();
+		discP.setNome(disc.getNome());
+		discP.setCargaHoraria(disc.getCargaHoraria());
+		discP = repositoryPadrao.save(discP);
+		disc.setIdDisciplinaPadrao(discP.getId());
+		repository.save(disc);
+	}
 
+	public void desassocia(Long id) {
+		Disciplina disc = repository.findOne(id);
+		disc.setIdDisciplinaPadrao(null);
+		repository.save(disc);
+	}
+	
 }
