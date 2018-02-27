@@ -28,6 +28,8 @@ public class IesService {
 		return repository.findAll(pageable);
 	}
 	
+	
+	
 	public List<Ies> todos () {
 		return repository.findAll();
 	}
@@ -44,12 +46,18 @@ public class IesService {
 		repository.delete(id);
 	}	
 	
-	public Long registros() {
+	public Long contaPaginas() {
 		return repository.count();
 	}
 
-	public List<Ies> procuraPorNome(String nome) {
-		return repository.findByNome(nome);
+	public Page<Ies> buscaPorNome(String nome, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByNomeContaining(nome, pageable);
 	}
+	
 	
 }
