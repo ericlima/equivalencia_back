@@ -43,9 +43,9 @@ public class IesController {
 		return service.obtem(id);
 	}
 	
-	@GetMapping("/nome/{nome}")
-	public List<Ies> procuraPorNome(@PathVariable String nome) {
-		return service.procuraPorNome(nome);
+	@GetMapping("/nome/{nome}/pagina/{pagina}")
+	public List<Ies> procuraPorNome(@PathVariable String nome,@PathVariable Long pagina) {
+		return service.buscaPorNome(nome, pagina.intValue(), 10, "nome").getContent();
 	}
 	
 	@PostMapping
@@ -56,6 +56,11 @@ public class IesController {
 	@DeleteMapping("/{id}")
 	public void exclui(@PathParam(value = "id") Long id) {
 		service.exclui(id);
+	}
+	
+	@GetMapping("/contapaginas")
+	public Long contaPaginas() {
+		return service.contaPaginas()/20;
 	}
 	
 }
