@@ -28,8 +28,23 @@ public class CursoPadraoService {
 		return repository.findAll(pageable);
 	}
 	
+	public Page<CursoPadrao> buscaPorNome(String nome, int pagina, int registrosPorPagina, String ordenadoPor) {
+
+		Sort sort = new Sort(new Sort.Order(Direction.ASC, ordenadoPor));
+
+		Pageable pageable = new PageRequest(pagina, registrosPorPagina, sort);
+
+		return repository.findByNomeContaining(nome, pageable);
+	}
+	
 	public CursoPadrao obtem(Long id) {
-		return repository.findOne(id);
+		CursoPadrao retorno = null;
+		try {
+			retorno = repository.findOne(id);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		return retorno;
 	}
 	
 	public CursoPadrao salva(CursoPadrao entidade) {

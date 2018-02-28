@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name = "CURSO")
@@ -20,6 +23,13 @@ public class Curso {
 	
 	@Column(name = "ID_IES", nullable = false)
 	private Long idIes;
+	
+	@Column(name = "ID_CURSO_PADRAO")
+	private Long idCursoPadrao;
+
+	@JsonInclude()
+	@Transient
+	private String nomeCursoPadrao;
 
 	public Long getIdIes() {
 		return idIes;
@@ -28,9 +38,6 @@ public class Curso {
 	public void setIdIes(Long idIes) {
 		this.idIes = idIes;
 	}
-
-	@Column(name = "ID_CURSO_PADRAO")
-	private Long idCursoPadrao;
 
 	public Long getId() {
 		return id;
@@ -54,6 +61,14 @@ public class Curso {
 
 	public void setIdCursoPadrao(Long idCursoPadrao) {
 		this.idCursoPadrao = idCursoPadrao;
+	}
+	
+	public String getNomeCursoPadrao() {
+		return nomeCursoPadrao;
+	}
+
+	public void setNomeCursoPadrao(String nomeCursoPadrao) {
+		this.nomeCursoPadrao = nomeCursoPadrao;
 	}
 
 	@Override
