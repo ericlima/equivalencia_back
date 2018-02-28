@@ -11,8 +11,8 @@ import br.edu.cse.entity.Curso;
 public interface CursoRepository extends JpaRepository<Curso, Long> {
 
 	public List<Curso> findByNome(String nome);
-	
-public Page<Curso> findByIdIes(Long idIes, Pageable pageReguest);
+
+	public Page<Curso> findByIdIes(Long idIes, Pageable pageReguest);
 	
 	public Page<Curso> findByNomeContaining(String nome, Pageable pageReguest);
 	
