@@ -2,10 +2,10 @@ package br.edu.cse.controller;
 
 import java.util.Collection;
 import java.util.List;
-
-import javax.websocket.server.PathParam;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +26,13 @@ import br.edu.cse.service.DisciplinaService;
 @RequestMapping("/disciplina")
 public class DisciplinaController {
 
+	private MessageSource messageSource;
+
+	@Autowired
+	public void setMessageSource(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
+	
 	@Autowired
 	private DisciplinaService service;
 
@@ -99,6 +106,17 @@ public class DisciplinaController {
 	@GetMapping("/desassocia/{id}")
 	public void desassocia(@PathVariable Long id) {
 		service.desassocia(id);
+	}
+	
+	@GetMapping("/message")
+	public String pegaMessage() {
+		String retorno;
+		try {
+			retorno = messageSource.getMessage("hello.header",null,Locale.US);
+		} catch (Exception e) {
+			retorno = e.getMessage();
+		}
+		return retorno;
 	}
 
 
