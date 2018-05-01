@@ -63,26 +63,4 @@ public class IesController {
 		return service.contaPaginas()/20;
 	}
 	
-	@ApiOperation(value = "recupera um arquivo para download da tabela de anexos por idAnexo", notes = "Busca todos as Anexos do Processo de Análise", response = AnexoDTO.class)
-	@GetMapping("/download/{id}")
-    	public void downloadAnexo(@PathVariable Long id, final HttpServletRequest request, final HttpServletResponse response) {
-		AnexoDTO anexo = this.obterAnexo(id);
-		byte[] decoded = org.apache.commons.codec.binary.Base64.decodeBase64(anexo.getAnexo().getBytes());
-
-		response.reset();
-		response.setContentType(selecionaTipoContentType(anexo.getNomeAnexo()));
-		response.setHeader("Content-Disposition", "filename='" + anexo.getNomeAnexo() + "'");
-		response.setContentLength(decoded.length);		
-
-		try {
-			InputStream input = new BinaryStreamImpl(decoded);
-			OutputStream output = response.getOutputStream();
-			IOUtils.copyLarge(input, output);
-            output.flush();
-		} catch (IOException e) {
-			throw new CustomGenericException("500", "anexo download", e, e.getStackTrace()[0]);
-		}
-		
-    }
-	
 }
